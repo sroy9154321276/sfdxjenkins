@@ -10,11 +10,6 @@ node {
     def SFDC_HOST_DH ="https://login.salesforce.com"
     def CONNECTED_APP_CONSUMER_KEY_DH ="3MVG9Ijq7vc89psq.flXuBWXM6n3zNZRdL54juAPlZkWh7qDto0Br3h9j27FlAMHKdyTHxUe5v.jwPgXVboCj "
     def JWT_CRED_ID_DH="ad4288e7-4adb-495a-a2d6-c87ab19560a3m"
-
-    println 'KEY IS' 
-    println HUB_ORG
-    println SFDC_HOST
-    println CONNECTED_APP_CONSUMER_KEY
     def toolbelt = tool 'toolbelt'
 
     stage('checkout source') {
