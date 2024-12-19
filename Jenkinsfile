@@ -12,7 +12,6 @@ node {
     def JWT_CRED_ID_DH="ad4288e7-4adb-495a-a2d6-c87ab19560a3m"
 
     println 'KEY IS' 
-    println JWT_KEY_CRED_ID
     println HUB_ORG
     println SFDC_HOST
     println CONNECTED_APP_CONSUMER_KEY
