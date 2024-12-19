@@ -6,10 +6,16 @@ node {
     def RUN_ARTIFACT_DIR="tests/${BUILD_NUMBER}"
     def SFDC_USERNAME
 
-    def HUB_ORG_DH="subhojitroy@subhojitroy-240523-932.demo"
-    def SFDC_HOST_DH ="https://login.salesforce.com"
-    def CONNECTED_APP_CONSUMER_KEY_DH ="3MVG9Ijq7vc89psq.flXuBWXM6n3zNZRdL54juAPlZkWh7qDto0Br3h9j27FlAMHKdyTHxUe5v.jwPgXVboCj "
-    def JWT_CRED_ID_DH="ad4288e7-4adb-495a-a2d6-c87ab19560a3m"
+    def HUB_ORG=env.HUB_ORG_DH
+    def SFDC_HOST = env.SFDC_HOST_DH
+    def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
+    def CONNECTED_APP_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
+
+    println 'KEY IS' 
+    println JWT_KEY_CRED_ID
+    println HUB_ORG
+    println SFDC_HOST
+    println CONNECTED_APP_CONSUMER_KEY
     def toolbelt = tool 'toolbelt'
 
     stage('checkout source') {
@@ -17,7 +23,7 @@ node {
         checkout scm
     }
 
-    withCredentials([file(credentialsId: JWT_CRED_ID_DH, variable: 'jwt_key_file')]) {
+    withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
         stage('Deploye Code') {
             if (isUnix()) {
                 rc = sh returnStatus: true, script: "${toolbelt} force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --instanceurl ${SFDC_HOST}"
