@@ -28,6 +28,7 @@ node {
 
 		rc = command "${toolbelt}/sf org login jwt --instance-url ${SFDC_HOST} --client-id ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwt-key-file ${jwt_key_file} --set-default-dev-hub"
           	println rc
+		if (rc != 0) { error 'hub org authorization failed' }
 			  
         }
     }
