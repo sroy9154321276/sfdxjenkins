@@ -25,11 +25,9 @@ node {
 
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
         stage('Deploye Code') {
-            if (isUnix()) {
+
 		rc = command "${toolbelt}/sf org login jwt --instance-url ${SFDC_HOST} --client-id ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwt-key-file ${jwt_key_file} --set-default-dev-hub --alias HubOrg"
-                }else{
-                 rc = bat returnStatus: true, script: "\"${toolbelt}\" sf org login jwt --username subhojitroy@subhojitroy-240523-932.demo --jwt-key-file server.key --client-id 3MVG9Ijq7vc89psq.flXuBWXM6n3zNZRdL54juAPlZkWh7qDto0Br3h9j27FlAMHKdyTHxUe5v.jwPgXVboCj "
-            }
+
             if (rc != 0) { error 'hub org authorization failed' }
 
 			println rc
