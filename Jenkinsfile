@@ -27,17 +27,7 @@ node {
         stage('Deploye Code') {
 
 		rc = command "${toolbelt}/sf org login jwt --instance-url ${SFDC_HOST} --client-id ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwt-key-file ${jwt_key_file} --set-default-dev-hub --alias HubOrg"
-
-            if (rc != 0) { error 'hub org authorization failed' }
-
-			println rc
-			
-			// need to pull out assigned username
-			if (isUnix()) {
-				rmsg = sh returnStdout: true, script: "${toolbelt} force:mdapi:deploy -d manifest/. -u ${HUB_ORG}"
-			}else{
-			   rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:mdapi:deploy -d manifest/. -u ${HUB_ORG}"
-			}
+          	println rc
 			  
             printf rmsg
             println('Hello from a Job DSL script!')
